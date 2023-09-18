@@ -6,12 +6,13 @@
 /*   By: juyojeon <juyojeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:15:27 by juyojeon          #+#    #+#             */
-/*   Updated: 2023/09/18 22:12:51 by juyojeon         ###   ########.fr       */
+/*   Updated: 2023/09/18 22:20:26 by juyojeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d_bonus.h"
 
+static void	draw_sprite_img(t_data *data, t_img *s_img, t_sprite *sprite);
 static void	add_first_sprite(t_data *data);
 
 void	draw_sprite(t_data *data)
@@ -43,7 +44,7 @@ void	add_sprite(t_data *data, int x, int y)
 	t_sprite	*new;
 
 	new_dist = pow(data->player.x - x, 2) + pow(data->player.y - y, 2);
-	if (data->sprite)
+	if (!data->sprite)
 		add_first_sprite(data);
 	temp = data->sprite;
 	while (temp->next)
