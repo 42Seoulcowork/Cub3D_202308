@@ -6,7 +6,7 @@
 /*   By: juyojeon <juyojeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 17:06:31 by jiyeolee          #+#    #+#             */
-/*   Updated: 2023/09/18 21:43:27 by juyojeon         ###   ########.fr       */
+/*   Updated: 2023/09/18 23:08:01 by juyojeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,8 @@ typedef struct s_sprite
 {
 	int				x;
 	int				y;
+	int				start;
+	int				end;
 	double			dist;
 	struct s_sprite	*next;
 }	t_sprite;
