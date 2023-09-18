@@ -6,7 +6,7 @@
 /*   By: juyojeon <juyojeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 17:06:31 by jiyeolee          #+#    #+#             */
-/*   Updated: 2023/09/17 22:56:29 by juyojeon         ###   ########.fr       */
+/*   Updated: 2023/09/18 21:43:27 by juyojeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,13 @@
 
 # define NUM_TEXTURES 9
 
-# define TEXTURE_WIDTH 64
-# define TEXTURE_HEIGHT 64
+# define WALL_WIDTH 64
+# define WALL_HEIGHT 64
+# define DOOR_WIDTH 512
+# define DOOR_HEIGHT 512
+# define SP_WIDTH 300
+# define SP_HEIGHT 556
+
 # define TILE_SIZE 64
 
 # define WINDOW_WIDTH 1280
@@ -93,6 +98,8 @@ typedef struct s_ray
 	double	delta_dist_y;
 	int		step_x;
 	int		step_y;
+	int		map_x;
+	int		map_y;
 	double	side_dist_x;
 	double	side_dist_y;
 	int		side;
@@ -135,6 +142,14 @@ typedef struct s_door
 	struct s_door	*next;
 }	t_door;
 
+typedef struct s_sprite
+{
+	int				x;
+	int				y;
+	double			dist;
+	struct s_sprite	*next;
+}	t_sprite;
+
 typedef struct s_data
 {
 	void		*mlx;
@@ -150,7 +165,7 @@ typedef struct s_data
 	int			ceiling_color;
 	int			mouse_mode_flag;
 	t_door		*door;
-	int			sprite_selection_over_time;
+	t_sprite	*sprite;
 }	t_data;
 
 #endif

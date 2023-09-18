@@ -6,7 +6,7 @@
 /*   By: juyojeon <juyojeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 17:02:53 by jiyeolee          #+#    #+#             */
-/*   Updated: 2023/09/17 22:57:15 by juyojeon         ###   ########.fr       */
+/*   Updated: 2023/09/18 22:11:57 by juyojeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	data_mlx_init(t_data *data)
 	data->ceiling_color = 0;
 	data->mouse_mode_flag = FALSE;
 	data->door = 0;
-	data->sprite_selection_over_time = 0;
+	data->sprite = 0;
 	data->mlx = mlx_init();
 	if (!data->mlx)
 		error_exit("Error : mlx_init failed\n", data);
@@ -35,9 +35,12 @@ void	data_mlx_init(t_data *data)
 	if (!data->win)
 		error_exit("Error : mlx_new_window failed\n", data);
 	init_img(&data->img, data, WINDOW_WIDTH, WINDOW_HEIGHT);
-	i = -1;
-	while (++i < NUM_TEXTURES)
-		init_img(&data->texture[i], data, TEXTURE_WIDTH, TEXTURE_HEIGHT);
+	i = 0;
+	while (i <= EAST)
+		init_img(&data->texture[i++], data, WALL_WIDTH, WALL_HEIGHT);
+	init_img(&data->texture[i++], data, DOOR_WIDTH, DOOR_HEIGHT);
+	while (i < NUM_TEXTURES)
+		init_img(&data->texture[i++], data, SP_WIDTH, SP_HEIGHT);
 	player_init(data);
 }
 
