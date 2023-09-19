@@ -6,7 +6,7 @@
 /*   By: juyojeon <juyojeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 23:27:22 by juyojeon          #+#    #+#             */
-/*   Updated: 2023/09/18 23:13:50 by juyojeon         ###   ########.fr       */
+/*   Updated: 2023/09/18 22:11:38 by juyojeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,6 @@ void	rendering_image(t_data *data);
 void	input_vertical_line(t_data *data, t_img *img, t_ray *ray, int i);
 
 void	draw_sprite(t_data *data);
-void	add_sprite(t_data *data, int x, int y, int i);
+void	add_sprite(t_data *data, int x, int y);
 
 #endif

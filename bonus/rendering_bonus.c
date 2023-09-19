@@ -6,14 +6,14 @@
 /*   By: juyojeon <juyojeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 17:20:52 by juyojeon          #+#    #+#             */
-/*   Updated: 2023/09/18 23:08:03 by juyojeon         ###   ########.fr       */
+/*   Updated: 2023/09/18 22:11:57 by juyojeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d_bonus.h"
 
 static void	set_ray(t_player *player, t_ray *r, double camera_i);
-static void	dda_algorithm(t_data *data, t_ray *ray, int i);
+static void	dda_algorithm(t_data *data, t_ray *ray);
 static void	set_perp_wall_dist(t_player *p, t_ray *ray);
 
 void	rendering_image(t_data *data)
@@ -25,7 +25,7 @@ void	rendering_image(t_data *data)
 	while (++i < WINDOW_WIDTH)
 	{
 		set_ray(&data->player, &ray, 2 * (double)i / (WINDOW_WIDTH - 1) - 1);
-		dda_algorithm(data, &ray, i);
+		dda_algorithm(data, &ray);
 		set_perp_wall_dist(&data->player, &ray);
 		input_vertical_line(data, &data->img, &ray, i);
 	}
@@ -61,7 +61,7 @@ static void	set_ray(t_player *player, t_ray *r, double camera_i)
 	}
 }
 
-static void	dda_algorithm(t_data *data, t_ray *ray, int i)
+static void	dda_algorithm(t_data *data, t_ray *ray)
 {
 	ray->map_x = (int)(data->player.x);
 	ray->map_y = (int)(data->player.y);
@@ -80,7 +80,7 @@ static void	dda_algorithm(t_data *data, t_ray *ray, int i)
 			ray->side = 1;
 		}
 		if (data->map[ray->map_y][ray->map_x] == '3')
-			add_sprite(data, ray->map_x, ray->map_y, i);
+			add_sprite(data, ray->map_x, ray->map_y);
 		else if (data->map[ray->map_y][ray->map_x] != '0')
 			break ;
 	}
