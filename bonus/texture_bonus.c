@@ -6,7 +6,7 @@
 /*   By: juyojeon <juyojeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 17:20:52 by juyojeon          #+#    #+#             */
-/*   Updated: 2023/09/18 20:35:20 by juyojeon         ###   ########.fr       */
+/*   Updated: 2023/09/19 16:29:14 by juyojeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,10 @@ static unsigned int	texture_color(t_ray *ray, t_texture *tex)
 	char			*tex_color;
 	unsigned int	color;
 
-	tex_y = (int)(tex->pos) & (tex->curr_img->height - 1);
+	if ((int)(tex->pos) >= tex->curr_img->height)
+		tex_y = tex->curr_img->height - 1;
+	else
+		tex_y = (int)(tex->pos);
 	tex->pos += tex->step;
 	tex_color = tex->curr_img->addr + (tex_y * tex->curr_img->size_l + \
 				tex->x * (tex->curr_img->bpp / 8));
