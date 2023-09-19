@@ -3,10 +3,10 @@ SO ../mandantory_textures/redbrick.xpm
 WE ../mandantory_textures/wood.xpm
 EA ../mandantory_textures/greystone.xpm
 DO ../bonus_textures/door.xpm
-S1 ../bonus_textures/mushroom1.xpm
-S2 ../bonus_textures/mushroom2.xpm
-S3 ../bonus_textures/mushroom3.xpm
-S4 ../bonus_textures/mushroom4.xpm
+S1 ../bonus_textures/fire1.xpm
+S2 ../bonus_textures/fire2.xpm
+S3 ../bonus_textures/fire3.xpm
+S4 ../bonus_textures/fire4.xpm
 
 F 102,102,255
 C 153,255,255
