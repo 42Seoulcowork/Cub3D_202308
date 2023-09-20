@@ -6,7 +6,7 @@
 /*   By: juyojeon <juyojeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 17:20:52 by juyojeon          #+#    #+#             */
-/*   Updated: 2023/09/17 22:58:16 by juyojeon         ###   ########.fr       */
+/*   Updated: 2023/09/20 21:49:00 by juyojeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,24 @@ static void	set_perp_wall_dist(t_player *p, t_ray *ray, int map_x, int map_y);
 void	rendering_image(t_data *data)
 {
 	t_ray			ray;
-	struct timeval	time;
 	int				i;
+	struct timeval	time;
+	t_img			*sprite_img;
 
-	gettimeofday(&time, 0);
-	data->sprite_selection_over_time = (time.tv_usec % 100000) / 25000;
 	i = -1;
 	while (++i < WINDOW_WIDTH)
 	{
 		set_ray(&data->player, &ray, 2 * (double)i / (WINDOW_WIDTH - 1) - 1);
 		dda_algorithm(data, &ray);
+		data->z_buffer[i] = ray.perp_wall_dist;
 		input_vertical_line(data, &data->img, &ray, i);
 	}
-	// input_minimap(data);
+	gettimeofday(&time, 0);
+	sprite_img = &(data->texture[SP1 + (time.tv_usec % 0x80000) / 0x20000]);
+	sort_sprites(data);
+	i = -1;
+	while (++i < data->num_sprites)
+		input_sprite(data, sprite_img, &(data->sprite[i]));
 }
 
 static void	set_ray(t_player *player, t_ray *r, double camera_i)
@@ -83,7 +88,7 @@ static void	dda_algorithm(t_data *data, t_ray *ray)
 			map_y += ray->step_y;
 			ray->side = 1;
 		}
-		if (data->map[map_y][map_x] != '0')
+		if (data->map[map_y][map_x] == '1' || data->map[map_y][map_x] == '2')
 			break ;
 	}
 	ray->texture_type = data->map[map_y][map_x];
