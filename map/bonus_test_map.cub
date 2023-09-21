@@ -7,7 +7,6 @@ S1 ./sprite_textures/fire1.xpm
 S2 ./sprite_textures/fire2.xpm
 S3 ./sprite_textures/fire3.xpm
 S4 ./sprite_textures/fire4.xpm
-P ./sprite_textures/buttercup.xpm
 
 F 102,102,255
 C 153,255,255
