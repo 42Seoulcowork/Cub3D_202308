@@ -6,7 +6,7 @@
 /*   By: juyojeon <juyojeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 17:20:52 by juyojeon          #+#    #+#             */
-/*   Updated: 2023/09/20 21:49:00 by juyojeon         ###   ########.fr       */
+/*   Updated: 2023/09/21 21:20:40 by juyojeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	rendering_image(t_data *data)
 	i = -1;
 	while (++i < data->num_sprites)
 		input_sprite(data, sprite_img, &(data->sprite[i]));
+	input_minimap(data);
 }
 
 static void	set_ray(t_player *player, t_ray *r, double camera_i)
