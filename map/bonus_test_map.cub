@@ -8,8 +8,8 @@ S2 ./bonus_textures/mushroom2.xpm
 S3 ./bonus_textures/mushroom3.xpm
 S4 ./bonus_textures/mushroom4.xpm
 
-F 102,102,255
-C 153,255,255
+F  84,180,53
+C  81,234,234
 
         1111111111111111111111111
         1000000000110000000000001
