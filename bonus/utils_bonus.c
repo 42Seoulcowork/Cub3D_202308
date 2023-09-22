@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jiyeolee <jiyeolee@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: juyojeon <juyojeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 17:39:30 by juyojeon          #+#    #+#             */
-/*   Updated: 2023/09/22 15:54:05 by jiyeolee         ###   ########.fr       */
+/*   Updated: 2023/09/22 16:50:48 by juyojeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,14 @@ int	is_valid_format(const char *path, const char *format)
 	return (FAILURE);
 }
 
+static int	return_color(const char *str, int return_value)
+{
+	if (*str == '\0')
+		return (-1);
+	else
+		return (return_value);
+}
+
 int	color_to_i(const char *str)
 {
 	int	temp;
@@ -56,11 +64,11 @@ int	color_to_i(const char *str)
 		}
 		if (temp > 255 || (*str != ',' && i != 3) || (*str != '\0' && i == 3))
 			return (-1);
+		while (*str == ' ')
+			str++;
 		return_value = (return_value << 8) + temp;
 		if (*str == ',')
 			str++;
 	}
-	if (*str != '\0')
-		return (-1);
-	return (return_value);
+	return (return_color(str, return_value));
 }
