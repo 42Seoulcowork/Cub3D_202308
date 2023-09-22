@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juyojeon <juyojeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jiyeolee <jiyeolee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 17:20:52 by juyojeon          #+#    #+#             */
-/*   Updated: 2023/09/19 22:09:57 by juyojeon         ###   ########.fr       */
+/*   Updated: 2023/09/22 16:06:28 by jiyeolee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,9 @@ void	input_vertical_line(t_data *data, t_img *img, t_ray *ray, int i)
 	while (row_idx <= end_idx)
 	{
 		dst = img->addr + row_idx * img->size_l + i * (img->bpp / 8);
-		*((unsigned int *)dst) = texture_color(ray, &tex);
+		if (i >= data->minimap_width || row_idx >= data->minimap_height)
+			*((unsigned int *)dst) = texture_color(ray, &tex);
+		tex.pos += tex.step;
 		row_idx++;
 	}
 }
@@ -76,12 +78,13 @@ static void	input_background(t_data *data, int start, int end, int x)
 
 	dst = data->img.addr;
 	color = data->ceiling_color;
-	i = 0;
-	while (i < start)
+	i = -1;
+	while (++i < start)
 	{
+		if ((x < data->minimap_width && i < data->minimap_height))
+			continue ;
 		dst = data->img.addr + i * data->img.size_l + x * (data->img.bpp / 8);
 		*(unsigned int *)dst = color;
-		i++;
 	}
 	color = data->floor_color;
 	i = end + 1;
@@ -102,7 +105,6 @@ static unsigned int	texture_color(t_ray *ray, t_texture *tex)
 	tex_y = (int)(tex->pos);
 	if (tex_y > tex->curr_img->height - 1)
 		tex_y = tex->curr_img->height - 1;
-	tex->pos += tex->step;
 	tex_color = tex->curr_img->addr + (tex_y * tex->curr_img->size_l + \
 				tex->x * (tex->curr_img->bpp / 8));
 	color = *((unsigned int *)tex_color);

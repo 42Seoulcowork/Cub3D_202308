@@ -3,114 +3,62 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juyojeon <juyojeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jiyeolee <jiyeolee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 13:35:55 by jiyeolee          #+#    #+#             */
-/*   Updated: 2023/09/21 21:22:03 by juyojeon         ###   ########.fr       */
+/*   Updated: 2023/09/22 16:18:05 by jiyeolee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d_bonus.h"
 
-static int	minimap_color(char type)
+typedef struct s_minimap
 {
-	int	rgb;
-
-	rgb = 0;
-	if (type == '0')
-		rgb = 236 << 16 | 238 << 8 | 129;
-	else if (type == '1')
-		rgb = 141 << 16 | 223 << 8 | 203;
-	else if (type == '2')
-		rgb = 166 << 16 | 255 << 8 | 150;
-	else if (type == '3')
-		rgb = 237 << 16 | 183 << 8 | 237;
-	else if (type == ' ')
-		rgb = 130 << 16 | 160 << 8 | 216;
-	return (rgb);
-}
-
-static void	input_square(t_data *data, char type, int x, int y)
-{	
-	int		i;
-	int		j;
+	int		row;
+	int		col;
+	double	x;
+	double	y;
 	char	*dst;
-	t_img	*img;
+}	t_minimap;
 
-	img = &data->img;
-	i = 0;
-	while (i < (int)TILE_SIZE * MINIMAP_SCALE)
-	{
-		j = 0;
-		while (j < (int)TILE_SIZE * MINIMAP_SCALE)
-		{
-			dst = img->addr + (int)(y * WINDOW_WIDTH) + j * img->size_l \
-				+ x + i * (img->bpp / 8);
-			*((unsigned int *)dst) = minimap_color(type);
-			j++;
-		}
-		i++;
-	}	
-}
-
-static unsigned int	player_color(int i, int j, t_img *img)
+static unsigned int	minimap_color(char type)
 {
 	unsigned int	color;
-	char			*tex_color;
 
-	tex_color = img->addr + j * img->size_l + i * (img->bpp / 8);
-	color = *((unsigned int *)tex_color);
+	color = 0;
+	if (type == '0')
+		color = 0xECEE81;
+	else if (type == '1')
+		color = 0x8DDFCB;
+	else if (type == '2')
+		color = 0xEDB7ED;
+	else if (type == '3')
+		color = 0xBC7AF9;
+	else if (type == ' ')
+		color = 0x82A0D8;
 	return (color);
 }
 
-static void	input_player(t_data *data, int x, int y)
-{	
-	int		i;
-	int		j;
-	char	*dst;
-	t_img	*img;
-
-	img = &data->img;
-	i = 0;
-	while (i < (int)TILE_SIZE * MINIMAP_SCALE)
-	{
-		j = 0;
-		while (j < (int)TILE_SIZE * MINIMAP_SCALE)
-		{
-			dst = img->addr + (int)(y * WINDOW_WIDTH) + j * img->size_l \
-				+ x + i * (img->bpp / 8);
-			*((unsigned int *)dst) = player_color(i, j, &(data->texture)[DOOR]);
-			j++;
-		}
-		i++;
-	}
-}
-
-// void	input_ray(t_data *data)
-// {
-
-
-// }
-
 void	input_minimap(t_data *data)
 {
-	int	row;
-	int	col;
+	t_minimap	mmap;
 
-	col = 0;
-	while (col < data->map_width)
+	mmap.row = -1;
+	while (++(mmap.row) < data->minimap_height)
 	{
-		row = 0;
-		while (row < data->map_height)
+		mmap.col = -1;
+		while (++(mmap.col) < data->minimap_width)
 		{
-			if ((int)data->player.x == col && (int)data->player.y == row)
-				input_player(data, (int)TILE_SIZE * MINIMAP_SCALE * col, (int)TILE_SIZE * MINIMAP_SCALE * row);
+			mmap.x = data->map_width * mmap.col / (double)data->minimap_width;
+			mmap.y = data->map_height * mmap.row / (double)data->minimap_height;
+			mmap.dst = data->img.addr + mmap.row * data->img.size_l \
+				+ mmap.col * (data->img.bpp / 8);
+			if (pow(mmap.x - data->player.x, 2) * 0.625 \
+				+ pow(mmap.y - data->player.y, 2) < 0.125)
+				*(unsigned int *)(mmap.dst) = 0x09FBD3;
 			else
-				input_square(data, data->map[row][col], \
-							(int)TILE_SIZE * MINIMAP_SCALE * col, (int)TILE_SIZE * MINIMAP_SCALE * row);
-			row++;
+				*(unsigned int *)(mmap.dst) \
+				= minimap_color(data->map[(int)mmap.y][(int)mmap.x]);
 		}
-		col++;
 	}
-	// input_ray(data);
 }

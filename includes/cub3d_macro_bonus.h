@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_macro_bonus.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juyojeon <juyojeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jiyeolee <jiyeolee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 17:06:31 by jiyeolee          #+#    #+#             */
-/*   Updated: 2023/09/19 23:46:20 by juyojeon         ###   ########.fr       */
+/*   Updated: 2023/09/22 15:59:17 by jiyeolee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,6 +157,8 @@ typedef struct s_data
 	t_map		*tempmap;
 	int			map_width;
 	int			map_height;
+	int			minimap_width;
+	int			minimap_height;
 	t_player	player;
 	int			floor_color;
 	int			ceiling_color;

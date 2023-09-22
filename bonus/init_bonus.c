@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juyojeon <juyojeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jiyeolee <jiyeolee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 17:02:53 by jiyeolee          #+#    #+#             */
-/*   Updated: 2023/09/19 23:46:27 by juyojeon         ###   ########.fr       */
+/*   Updated: 2023/09/22 15:44:35 by jiyeolee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ static void	player_init(t_data *data)
 	data->player.plane_y = 0.0;
 	data->player.walk_speed = WALK_SPEED;
 	data->player.turn_speed = TURN_SPEED;
+	data->minimap_height = ceil(WINDOW_HEIGHT * MINIMAP_SCALE);
+	data->minimap_width = ceil(WINDOW_WIDTH * MINIMAP_SCALE);
 }
 
 static void	sprite_init(t_data *data)
