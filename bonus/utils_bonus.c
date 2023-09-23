@@ -14,26 +14,26 @@
 
 int	is_valid_format(const char *path, const char *format)
 {
-	size_t	i;
-	size_t	j;
-	size_t	k;
+	size_t	p_len;
+	size_t	f_len;
+	size_t	p_idx;
+	size_t	f_idx;
 
-	i = ft_strlen(path) - 1;
-	j = ft_strlen(format) - 1;
-	while (i > 0)
+	p_len = ft_strlen(path);
+	f_len = ft_strlen(format);
+
+	if (p_len <= f_len)
+		return (FAILURE);
+	p_idx = p_len - f_len;
+	f_idx = 0;
+	while (p_idx < p_len)
 	{
-		k = 0;
-		while (path[i - k] == format[j - k])
-		{
-			k++;
-			if (k > j)
-				return (SUCCESS);
-			else if (k > i)
-				return (FAILURE);
-		}
-		i--;
+		if (path[p_idx] != format[f_idx])
+			return (FAILURE);
+		p_idx++;
+		f_idx++;
 	}
-	return (FAILURE);
+	return (SUCCESS);
 }
 
 static int	return_color(const char *str, int return_value)
