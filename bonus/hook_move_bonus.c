@@ -52,28 +52,28 @@ void	move_side_player(int key, t_player *p, char **map)
 
 void	door_change(t_data *data, t_player *player)
 {
-	t_door	*temp;
 	int		ans_x;
 	int		ans_y;
+	int		i;
 
-	temp = data->door;
-	if (temp == 0)
+	if (data->num_doors == 0)
 		return ;
 	ans_x = (int)(player->x);
 	ans_y = (int)(player->y);
 	if (find_door_pos(player->dir_x, player->dir_y, &ans_x, &ans_y))
 		return ;
-	while (temp)
+	i = 0;
+	while (i < data->num_doors)
 	{
-		if (temp->x == ans_x && temp->y == ans_y)
+		if ((data->door)[i].x == ans_x && (data->door)[i].y == ans_y)
 		{
-			if ((data->map)[temp->y][temp->x] == '2')
-				(data->map)[temp->y][temp->x] = '0';
+			if ((data->map)[ans_y][ans_x] == '2')
+				(data->map)[ans_y][ans_x] = '0';
 			else
-				(data->map)[temp->y][temp->x] = '2';
+				(data->map)[ans_y][ans_x] = '2';
 			break ;
 		}
-		temp = temp->next;
+		i++;		
 	}
 }
 

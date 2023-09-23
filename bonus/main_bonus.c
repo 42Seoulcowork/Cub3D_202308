@@ -13,7 +13,7 @@
 #include "../includes/cub3d_bonus.h"
 
 static int	print_image(t_data *data);
-static void	free_linked_list(void *ptr, int type);
+static void	free_linked_list(t_map *ptr);
 static void	free_allocated_data(t_data *data);
 
 int	main(int argc, char *argv[])
@@ -71,36 +71,21 @@ void	error_exit(const char *str, t_data *data)
 		free(data->map);
 	}
 	if (data->tempmap)
-		free_linked_list(data->tempmap, 0);
-	if (data->door)
-		free_linked_list(data->door, 1);
+		free_linked_list(data->tempmap);
 	exit(EXIT_FAILURE);
 }
 
-static void	free_linked_list(void *ptr, int type)
+static void	free_linked_list(t_map *ptr)
 {
 	t_map	*temp;
-	t_door	*temp_door;
 
-	if (type == 0)
+	while (ptr)
 	{
-		while (ptr)
-		{
-			temp = ptr;
-			if (temp->line)
-				free(temp->line);
-			ptr = temp->next;
-			free(temp);
-		}
-	}
-	else if (type == 1)
-	{
-		while (ptr)
-		{
-			temp_door = ptr;
-			ptr = temp_door->next;
-			free(temp_door);
-		}
+		temp = ptr;
+		if (temp->line)
+			free(temp->line);
+		ptr = temp->next;
+		free(temp);
 	}
 }
 

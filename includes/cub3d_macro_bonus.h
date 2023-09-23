@@ -59,7 +59,8 @@
 # define COMPLETE_BIT 0b11111111111
 
 # define MINIMAP_SCALE 0.3
-# define SPRITE_SIZE 100
+# define SPRITE_SIZE 50
+# define DOOR_SIZE 50
 
 # define PI 3.1415926535
 
@@ -135,9 +136,8 @@ typedef struct s_map
 
 typedef struct s_door
 {
-	int				x;
-	int				y;
-	struct s_door	*next;
+	int	x;
+	int	y;
 }	t_door;
 
 typedef struct s_sprite
@@ -163,7 +163,8 @@ typedef struct s_data
 	int			floor_color;
 	int			ceiling_color;
 	int			mouse_mode_flag;
-	t_door		*door;
+	t_door		door[DOOR_SIZE];
+	int			num_doors;
 	t_sprite	sprite[SPRITE_SIZE];
 	int			num_sprites;
 	double		z_buffer[WINDOW_WIDTH];

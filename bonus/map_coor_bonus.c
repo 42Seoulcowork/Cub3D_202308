@@ -95,24 +95,11 @@ static void	fill_player(t_data *data, int row_idx, char *line, int col_idx)
 
 static void	door_store(t_data *data, int row_idx, int col_idx, int fd)
 {
-	t_door	*new;
-	t_door	*temp;
-
-	new = (t_door *)malloc(sizeof(t_door));
-	if (!new)
-		parsing_error_exit("Error : Allocation failed\n", fd, 0, data);
-	new->x = col_idx;
-	new->y = row_idx;
-	new->next = 0;
-	if (!data->door)
-		data->door = new;
-	else
-	{
-		temp = data->door;
-		while (temp->next)
-			temp = temp->next;
-		temp->next = new;
-	}
+	if (data->num_doors >= DOOR_SIZE)
+		parsing_error_exit("Error\nToo many doors\n", fd, 0, data);
+	(data->door)[data->num_doors].x = col_idx;
+	(data->door)[data->num_doors].y = row_idx;
+	(data->num_doors)++;
 }
 
 void	make_map(t_data *data)

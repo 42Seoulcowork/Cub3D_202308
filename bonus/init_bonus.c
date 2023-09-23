@@ -14,6 +14,7 @@
 
 static void	init_img(t_img *img, t_data *data, int width, int height);
 static void	player_init(t_data *data);
+static void	door_init(t_data *data);
 static void	sprite_init(t_data *data);
 
 void	data_mlx_init(t_data *data)
@@ -27,7 +28,6 @@ void	data_mlx_init(t_data *data)
 	data->floor_color = 0;
 	data->ceiling_color = 0;
 	data->mouse_mode_flag = FALSE;
-	data->door = 0;
 	data->mlx = mlx_init();
 	if (!data->mlx)
 		error_exit("Error : mlx_init failed\n", data);
@@ -42,6 +42,7 @@ void	data_mlx_init(t_data *data)
 	while (i < NUM_TEXTURES)
 		init_img(&data->texture[i++], data, SPRITE_WIDTH, SPRITE_HEIGHT);
 	player_init(data);
+	door_init(data);
 	sprite_init(data);
 }
 
@@ -68,6 +69,19 @@ static void	player_init(t_data *data)
 	data->player.turn_speed = TURN_SPEED;
 	data->minimap_height = ceil(WINDOW_HEIGHT * MINIMAP_SCALE);
 	data->minimap_width = ceil(WINDOW_WIDTH * MINIMAP_SCALE);
+}
+
+static void	door_init(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	data->num_doors = 0;
+	while (i < DOOR_SIZE)
+	{
+		(data->door[i]).x = -1;
+		(data->door[i]).y = -1;
+	}
 }
 
 static void	sprite_init(t_data *data)
