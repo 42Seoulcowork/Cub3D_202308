@@ -6,7 +6,7 @@
 /*   By: jiyeolee <jiyeolee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 17:06:31 by jiyeolee          #+#    #+#             */
-/*   Updated: 2023/09/22 15:59:17 by jiyeolee         ###   ########.fr       */
+/*   Updated: 2023/09/24 21:43:55 by jiyeolee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@
 # define DOOR_HEIGHT 512
 # define SPRITE_WIDTH 140
 # define SPRITE_HEIGHT 140
-# define TILE_SIZE 64
-
 # define WINDOW_WIDTH 1280
 # define WINDOW_HEIGHT 768
 
@@ -61,8 +59,6 @@
 # define MINIMAP_SCALE 0.3
 # define SPRITE_SIZE 50
 # define DOOR_SIZE 50
-
-# define PI 3.1415926535
 
 enum e_xevent
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_macro.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juyojeon <juyojeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jiyeolee <jiyeolee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 17:06:31 by jiyeolee          #+#    #+#             */
-/*   Updated: 2023/09/15 16:36:33 by juyojeon         ###   ########.fr       */
+/*   Updated: 2023/09/24 21:14:50 by jiyeolee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,6 @@
 # define FLOOR_BIT 0b010000
 # define CEILING_BIT 0b100000
 # define COMPLETE_BIT 0b111111
-
-# define MINIMAP_SCALE_FACTOR 0.3
-
-# define PI 3.1415926535
 
 enum e_xevent
 {
