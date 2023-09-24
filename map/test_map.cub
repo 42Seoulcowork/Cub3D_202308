@@ -3,8 +3,8 @@ SO ./block_textures/redbrick.xpm
 WE ./block_textures/wood.xpm
 EA ./block_textures/greystone.xpm
 
-F 102,102,255
-C 153,255,255
+F  84,180,53
+C  81,234,234
 
         1111111111111111111111111
         1000000000110000000000001

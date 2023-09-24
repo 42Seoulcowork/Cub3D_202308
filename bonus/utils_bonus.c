@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juyojeon <juyojeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jiyeolee <jiyeolee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 17:39:30 by juyojeon          #+#    #+#             */
-/*   Updated: 2023/09/22 16:56:32 by juyojeon         ###   ########.fr       */
+/*   Updated: 2023/09/24 19:06:39 by jiyeolee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	is_valid_format(const char *path, const char *format)
 
 	p_len = ft_strlen(path);
 	f_len = ft_strlen(format);
-
 	if (p_len <= f_len)
 		return (FAILURE);
 	p_idx = p_len - f_len;
